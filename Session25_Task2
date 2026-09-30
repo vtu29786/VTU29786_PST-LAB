@@ -1,0 +1,53 @@
+Given a text string of length n and a pattern of length m, find all starting indices where the pattern occurs in the text.
+Note: You may assume that n>m.
+
+Examples: 
+
+Input: text = "geeksforgeeks", pattern = "geeks"
+Output:  [0, 8]
+Explanation: The string "geeks" occurs at index 0 and 8 in text.
+
+Input:  text =  "aabaacaadaabaaba", pattern = "aaba"
+Output: [0, 9,  12]
+
+kmp-algorithm-for-pattern-searching
+ 
+Naive Pattern Searching Algorithm
+The pattern moves over the text one position at a time and characters are compared. If all characters match, the index is stored; otherwise, the next position is checked.
+
+file.webpfile.webp
+PROGRAM
+import java.util.*;
+
+class GFG {
+    public static ArrayList<Integer> search(String pat, String txt) {
+
+        ArrayList<Integer> result = new ArrayList<>();
+
+        int m = pat.length();
+        int n = txt.length();
+
+        for (int i = 0; i <= n - m; i++) {
+
+            int j = 0;
+
+            while (j < m && txt.charAt(i + j) == pat.charAt(j)) {
+                j++;
+            }
+
+            if (j == m) {
+                result.add(i);
+            }
+        }
+
+        return result;
+    }
+
+    public static void main(String[] args) {
+
+        String txt = "geeksforgeeks";
+        String pat = "geeks";
+
+        System.out.println(search(pat, txt));
+    }
+}
