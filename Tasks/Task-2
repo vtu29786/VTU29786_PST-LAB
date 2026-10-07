@@ -1,0 +1,87 @@
+Task 2 (Difficult): Real-Time Stream Analytics Engine
+
+Problem Description
+A cloud analytics platform receives millions of sensor readings. Each reading contains a sensor ID and temperature value. Using stream processing concepts, perform the following operations:
+1.	Filter temperatures greater than 50.
+2.	Group readings by sensor ID.
+3.	Compute average temperature per sensor.
+4.	Sort sensors based on average temperature in descending order.
+Input Format
+•	First line contains integer N.
+•	Next N lines contain SensorID and Temperature.
+Output Format
+Display SensorID and average temperature sorted in descending order.
+
+Constraints
+•	1 ≤ N ≤ 10^5
+•	0 ≤ Temperature ≤ 100
+Sample Input
+6
+S1 60
+S2 40
+S1 80
+S3 70
+S2 90
+S3 30
+Sample Output
+S1 70.0
+S2 90.0
+S3 70.0
+
+program:
+
+import java.util.*;
+import java.util.stream.*;
+
+class Sensor {
+    String id;
+    int temperature;
+
+    Sensor(String id, int temperature) {
+        this.id = id;
+        this.temperature = temperature;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public int getTemperature() {
+        return temperature;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        int n = sc.nextInt();
+
+        List<Sensor> readings = new ArrayList<>();
+
+        for (int i = 0; i < n; i++) {
+            String id = sc.next();
+            int temp = sc.nextInt();
+            readings.add(new Sensor(id, temp));
+        }
+
+        Map<String, Double> averageMap =
+            readings.stream()
+                .collect(Collectors.groupingBy(
+                    Sensor::getId,
+                    Collectors.averagingInt(Sensor::getTemperature)
+                ));
+
+        averageMap.entrySet()
+            .stream()
+            .sorted((a, b) -> Double.compare(
+                b.getValue(), a.getValue()
+            ))
+            .forEach(entry -> System.out.println(
+                entry.getKey() + " " + entry.getValue()
+            ));
+
+        sc.close();
+    }
+}
