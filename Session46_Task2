@@ -1,0 +1,60 @@
+Scenario:
+
+A teacher wants to create a Java program to store marks of students. The number of students is not known in advance, so use a dynamic array. Add marks one by one and automatically increase the array size when it becomes full.
+
+Program:
+
+import java.util.Scanner;
+
+public class DynamicMarks {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int[] marks = new int[2];
+        int size = 0;
+
+        System.out.print("Enter number of students: ");
+        int n = sc.nextInt();
+
+        for (int i = 0; i < n; i++) {
+            System.out.print("Enter mark: ");
+            int mark = sc.nextInt();
+
+            if (size == marks.length) {
+                int[] newMarks = new int[marks.length * 2];
+
+                for (int j = 0; j < size; j++) {
+                    newMarks[j] = marks[j];
+                }
+
+                marks = newMarks;
+            }
+
+            marks[size] = mark;
+            size++;
+        }
+
+        System.out.println("Student Marks:");
+
+        for (int i = 0; i < size; i++) {
+            System.out.println(marks[i]);
+        }
+
+        sc.close();
+    }
+}
+
+Output:
+
+Enter number of students: 5
+Enter mark: 78
+Enter mark: 85
+Enter mark: 90
+Enter mark: 67
+Enter mark: 88
+Student Marks:
+78
+85
+90
+67
+88
