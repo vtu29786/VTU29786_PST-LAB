@@ -1,0 +1,42 @@
+Scenario:
+
+A teacher does not know the number of students in advance. Write a Java program using an ArrayList to store marks, display marks, find the highest mark, and calculate the average.
+
+Program:
+
+import java.util.ArrayList;
+
+public class StudentMarks {
+    public static void main(String[] args) {
+        ArrayList<Integer> marks = new ArrayList<>();
+
+        marks.add(78);
+        marks.add(85);
+        marks.add(92);
+        marks.add(67);
+        marks.add(88);
+
+        System.out.println("Student Marks: " + marks);
+
+        int highest = marks.get(0);
+        int sum = 0;
+
+        for (int mark : marks) {
+            if (mark > highest) {
+                highest = mark;
+            }
+            sum += mark;
+        }
+
+        double average = (double) sum / marks.size();
+
+        System.out.println("Highest Mark: " + highest);
+        System.out.println("Average Mark: " + average);
+    }
+}
+
+Output:
+
+Student Marks: [78, 85, 92, 67, 88]
+Highest Mark: 92
+Average Mark: 82.0
