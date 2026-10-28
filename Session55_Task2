@@ -1,0 +1,100 @@
+## Week 11 – Question 10: Smart Traffic Navigation
+
+### Question
+
+A smart city application stores road connectivity information using nested collections. Given `N` city junctions and `M` roads, determine whether a route exists between a source junction and a destination junction using a graph representation with collections.
+
+Input Format
+
+- The first line contains two integers `N` and `M`.
+- The next `M` lines contain pairs of connected junctions.
+- The last line contains the source and destination junctions.
+
+Output Format
+
+Print `YES` if a route exists; otherwise, print `NO`.
+
+### Program (Java)
+
+```
+
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+
+        ArrayList<ArrayList<Integer>> graph = new ArrayList<>();
+
+        for (int i = 0; i <= n; i++) {
+            graph.add(new ArrayList<>());
+        }
+
+        for (int i = 0; i < m; i++) {
+            int u = sc.nextInt();
+            int v = sc.nextInt();
+
+            graph.get(u).add(v);
+            graph.get(v).add(u);
+        }
+
+        int source = sc.nextInt();
+        int destination = sc.nextInt();
+
+        boolean[] visited = new boolean[n + 1];
+        Queue<Integer> queue = new LinkedList<>();
+
+        queue.add(source);
+        visited[source] = true;
+
+        while (!queue.isEmpty()) {
+            int current = queue.poll();
+
+            if (current == destination) {
+                System.out.println("YES");
+                sc.close();
+                return;
+            }
+
+            for (int neighbor : graph.get(current)) {
+                if (!visited[neighbor]) {
+                    visited[neighbor] = true;
+                    queue.add(neighbor);
+                }
+            }
+        }
+
+        System.out.println("NO");
+        sc.close();
+    }
+}
+
+```
+
+### Input
+
+```
+5 4
+1 2
+2 3
+3 4
+4 5
+1 5
+```
+
+### Output
+
+```
+YES
+```
+
+### Explanation
+
+The roads connect the junctions as follows:
+
+`1 → 2 → 3 → 4 → 5`
+
+A route exists from junction `1` to junction `5`, so the output is `YES`.
