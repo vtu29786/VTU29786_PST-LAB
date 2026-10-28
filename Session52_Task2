@@ -1,0 +1,82 @@
+## Week 11 – Question 4: Students with Second Lowest Grade Using Nested List
+
+### Question
+
+Given the names and grades for each student in a class, store them in a nested list and print the name(s) of any student(s) having the second lowest grade.
+
+If multiple students have the second lowest grade, sort their names alphabetically and print each name on a new line.
+
+### Program (Java)
+
+```
+
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int n = sc.nextInt();
+        ArrayList<ArrayList<Object>> students = new ArrayList<>();
+
+        for (int i = 0; i < n; i++) {
+            String name = sc.next();
+            double grade = sc.nextDouble();
+
+            ArrayList<Object> student = new ArrayList<>();
+            student.add(name);
+            student.add(grade);
+
+            students.add(student);
+        }
+
+        TreeSet<Double> grades = new TreeSet<>();
+
+        for (ArrayList<Object> student : students) {
+            grades.add((Double) student.get(1));
+        }
+
+        double secondLowest = (Double) grades.toArray()[1];
+
+        ArrayList<String> names = new ArrayList<>();
+
+        for (ArrayList<Object> student : students) {
+            if ((Double) student.get(1) == secondLowest) {
+                names.add((String) student.get(0));
+            }
+        }
+
+        Collections.sort(names);
+
+        for (String name : names) {
+            System.out.println(name);
+        }
+
+        sc.close();
+    }
+}
+
+```
+
+### Input
+
+```
+5
+Harry
+37.21
+Berry
+37.21
+Tina
+37.2
+Akriti
+41
+Harsh
+39
+```
+
+### Output
+
+```
+Berry
+Harry
+```
