@@ -1,0 +1,76 @@
+## Week 11 – Question 7: Tree — Preorder Traversal
+
+### Question
+
+Complete the function that takes the root of a binary tree and prints its preorder traversal as a single line of space-separated values.
+
+In preorder traversal, visit nodes in this order:
+
+1. Root
+2. Left subtree
+3. Right subtree
+
+### Program (Java)
+
+```
+
+import java.util.*;
+
+class Node {
+    int data;
+    Node left, right;
+
+    Node(int data) {
+        this.data = data;
+    }
+}
+
+public class Main {
+    static void preOrder(Node root) {
+        if (root == null) {
+            return;
+        }
+
+        System.out.print(root.data + " ");
+        preOrder(root.left);
+        preOrder(root.right);
+    }
+
+    public static void main(String[] args) {
+        Node root = new Node(1);
+        root.left = new Node(2);
+        root.right = new Node(3);
+        root.left.left = new Node(4);
+        root.left.right = new Node(5);
+
+        preOrder(root);
+    }
+}
+
+```
+
+### Output
+
+```
+1 2 4 5 3
+```
+
+### Explanation
+
+The tree is:
+
+```
+       1
+      / \
+     2   3
+    / \
+   4   5
+```
+
+Preorder traversal visits:
+
+- Root: `1`
+- Left subtree: `2 4 5`
+- Right subtree: `3`
+
+Final output: `1 2 4 5 3`
