@@ -1,0 +1,39 @@
+Scenario:
+
+A teacher wants to store marks of students using their roll numbers as keys. Write a Java program to display the marks of a particular student.
+
+Program:
+
+import java.util.HashMap;
+import java.util.Scanner;
+
+public class MarksHashMap {
+    public static void main(String[] args) {
+        HashMap<Integer, Integer> marks = new HashMap<>();
+
+        marks.put(101, 85);
+        marks.put(102, 92);
+        marks.put(103, 78);
+        marks.put(104, 88);
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter roll number to search: ");
+        int rollNo = sc.nextInt();
+
+        if (marks.containsKey(rollNo)) {
+            System.out.println("Roll Number: " + rollNo);
+            System.out.println("Student Mark: " + marks.get(rollNo));
+        } else {
+            System.out.println("Student not found.");
+        }
+
+        sc.close();
+    }
+}
+
+Output:
+
+Enter roll number to search: 102
+Roll Number: 102
+Student Mark: 92
