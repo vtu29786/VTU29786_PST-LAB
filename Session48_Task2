@@ -1,0 +1,34 @@
+Scenario:
+
+A customer purchases several items, including repeated items. Write a Java program using LinkedHashSet to display only unique items in the order they were purchased.
+
+Program:
+
+import java.util.LinkedHashSet;
+
+public class UniqueItems {
+    public static void main(String[] args) {
+        LinkedHashSet<String> items = new LinkedHashSet<>();
+
+        items.add("Laptop");
+        items.add("Phone");
+        items.add("Headphones");
+        items.add("Phone");
+        items.add("Mouse");
+        items.add("Laptop");
+
+        System.out.println("Unique Purchased Items:");
+
+        for (String item : items) {
+            System.out.println(item);
+        }
+    }
+}
+
+Output:
+
+Unique Purchased Items:
+Laptop
+Phone
+Headphones
+Mouse
