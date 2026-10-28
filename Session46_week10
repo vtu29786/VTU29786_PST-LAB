@@ -1,0 +1,94 @@
+Scenario:
+
+An online shopping system must maintain products, quickly search products by ID, and process orders according to priority. Use ArrayList to store products, HashMap to search by product ID, and PriorityQueue to process orders.
+
+
+Program:
+
+
+import java.util.*;
+
+class Product {
+    int id;
+    String name;
+    double price;
+
+    Product(int id, String name, double price) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+    }
+
+    public String toString() {
+        return id + " - " + name + " - Rs." + price;
+    }
+}
+
+class Order implements Comparable<Order> {
+    int orderId;
+    int priority;
+
+    Order(int orderId, int priority) {
+        this.orderId = orderId;
+        this.priority = priority;
+    }
+
+    public int compareTo(Order other) {
+        return Integer.compare(this.priority, other.priority);
+    }
+
+    public String toString() {
+        return "Order " + orderId + " (Priority " + priority + ")";
+    }
+}
+
+public class OnlineShopping {
+    public static void main(String[] args) {
+        ArrayList<Product> products = new ArrayList<>();
+        HashMap<Integer, Product> productMap = new HashMap<>();
+        PriorityQueue<Order> orders = new PriorityQueue<>();
+
+        products.add(new Product(101, "Laptop", 50000));
+        products.add(new Product(102, "Phone", 20000));
+        products.add(new Product(103, "Headphones", 1500));
+
+        for (Product p : products) {
+            productMap.put(p.id, p);
+        }
+
+        System.out.println("All Products:");
+        for (Product p : products) {
+            System.out.println(p);
+        }
+
+        int searchId = 102;
+        System.out.println("\nSearching Product ID " + searchId + ":");
+        System.out.println(productMap.get(searchId));
+
+        orders.add(new Order(1, 3));
+        orders.add(new Order(2, 1));
+        orders.add(new Order(3, 2));
+
+        System.out.println("\nProcessing Orders:");
+        while (!orders.isEmpty()) {
+            System.out.println(orders.poll());
+        }
+    }
+}
+
+Output:
+
+
+All Products:
+101 - Laptop - Rs.50000.0
+102 - Phone - Rs.20000.0
+103 - Headphones - Rs.1500.0
+
+Searching Product ID 102:
+102 - Phone - Rs.20000.0
+
+Processing Orders:
+Order 2 (Priority 1)
+Order 3 (Priority 2)
+Order 1 (Priority 3)
+```
