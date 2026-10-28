@@ -1,0 +1,40 @@
+Scenario:
+
+A teacher enters students' marks, but some marks are repeated. Write a Java program using TreeSet to display the unique marks in ascending order.
+
+Program:
+
+import java.util.Scanner;
+import java.util.TreeSet;
+
+public class SortedMarks {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        TreeSet<Integer> marks = new TreeSet<>();
+
+        System.out.print("Enter number of marks: ");
+        int n = sc.nextInt();
+
+        for (int i = 0; i < n; i++) {
+            System.out.print("Enter mark: ");
+            marks.add(sc.nextInt());
+        }
+
+        System.out.println("Unique Marks in Ascending Order:");
+        System.out.println(marks);
+
+        sc.close();
+    }
+}
+
+Output:
+
+Enter number of marks: 6
+Enter mark: 75
+Enter mark: 90
+Enter mark: 80
+Enter mark: 75
+Enter mark: 95
+Enter mark: 80
+Unique Marks in Ascending Order:
+[75, 80, 90, 95]
