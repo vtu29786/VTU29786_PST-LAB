@@ -1,0 +1,63 @@
+## Week 12 – Question 3: Top K Frequent Elements
+
+Problem Statement:
+
+Given an integer array `nums` and an integer `k`, return the `k` most frequent elements in the array.
+
+### Java Program
+
+```
+
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int n = sc.nextInt();
+        int[] nums = new int[n];
+
+        HashMap<Integer, Integer> map = new HashMap<>();
+
+        for (int i = 0; i < n; i++) {
+            nums[i] = sc.nextInt();
+            map.put(nums[i], map.getOrDefault(nums[i], 0) + 1);
+        }
+
+        int k = sc.nextInt();
+
+        ArrayList<Integer> list = new ArrayList<>(map.keySet());
+
+        Collections.sort(list, (a, b) -> map.get(b) - map.get(a));
+
+        for (int i = 0; i < k; i++) {
+            System.out.print(list.get(i) + " ");
+        }
+
+        sc.close();
+    }
+}
+
+```
+
+### Input
+
+```
+6
+1 1 1 2 2 3
+2
+```
+
+### Output
+
+```
+1 2
+```
+
+### Explanation
+
+- `1` occurs 3 times.
+- `2` occurs 2 times.
+- `3` occurs 1 time.
+
+The two most frequent elements are 1 and 2.
