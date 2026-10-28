@@ -1,0 +1,65 @@
+## Week 12 – Question 4: Group Anagrams
+
+Problem Statement:
+
+Given an array of strings, group the anagrams together. Anagrams are words that contain the same characters in a different order.
+
+### Java Program
+
+```
+
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int n = sc.nextInt();
+        String[] words = new String[n];
+
+        HashMap<String, ArrayList<String>> map = new HashMap<>();
+
+        for (int i = 0; i < n; i++) {
+            words[i] = sc.next();
+
+            char[] ch = words[i].toCharArray();
+            Arrays.sort(ch);
+
+            String key = new String(ch);
+
+            map.putIfAbsent(key, new ArrayList<>());
+            map.get(key).add(words[i]);
+        }
+
+        for (ArrayList<String> group : map.values()) {
+            System.out.println(group);
+        }
+
+        sc.close();
+    }
+}
+
+```
+
+### Input
+
+```
+6
+eat tea tan ate nat bat
+```
+
+### Output
+
+```
+[eat, tea, ate]
+[tan, nat]
+[bat]
+```
+
+### Explanation
+
+- `eat`, `tea`, and `ate` are anagrams.
+- `tan` and `nat` are anagrams.
+- `bat` has no matching anagram in the input.
+
+Note: The order in which groups are displayed may vary because `HashMap` does not guarantee ordering.
