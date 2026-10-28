@@ -1,0 +1,108 @@
+## Week 12 – Question 7: Smart Traffic Navigation
+
+Problem Statement:
+
+A city has several locations connected by roads. Represent the locations and roads using a graph. Given a starting location and a destination, find a path between them using graph traversal.
+
+### Java Program
+
+```
+
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+
+        HashMap<Integer, ArrayList<Integer>> graph = new HashMap<>();
+
+        for (int i = 1; i <= n; i++) {
+            graph.put(i, new ArrayList<>());
+        }
+
+        for (int i = 0; i < m; i++) {
+            int u = sc.nextInt();
+            int v = sc.nextInt();
+
+            graph.get(u).add(v);
+            graph.get(v).add(u);
+        }
+
+        int start = sc.nextInt();
+        int destination = sc.nextInt();
+
+        Queue<Integer> queue = new LinkedList<>();
+        HashSet<Integer> visited = new HashSet<>();
+        HashMap<Integer, Integer> parent = new HashMap<>();
+
+        queue.add(start);
+        visited.add(start);
+
+        while (!queue.isEmpty()) {
+            int current = queue.poll();
+
+            if (current == destination) {
+                break;
+            }
+
+            for (int next : graph.get(current)) {
+                if (!visited.contains(next)) {
+                    visited.add(next);
+                    parent.put(next, current);
+                    queue.add(next);
+                }
+            }
+        }
+
+        if (!visited.contains(destination)) {
+            System.out.println("No path found");
+        } else {
+            ArrayList<Integer> path = new ArrayList<>();
+            int current = destination;
+
+            while (current != start) {
+                path.add(current);
+                current = parent.get(current);
+            }
+
+            path.add(start);
+            Collections.reverse(path);
+
+            System.out.println("Path: " + path);
+        }
+
+        sc.close();
+    }
+}
+
+```
+
+### Input
+
+```
+5 5
+1 2
+1 3
+2 4
+3 4
+4 5
+1 5
+```
+
+### Output
+
+```
+Path: [1, 2, 4, 5]
+```
+
+### Explanation
+
+- The city locations are represented as vertices.
+- Roads between locations are represented as edges.
+- BFS (Breadth-First Search) explores nearby locations first.
+- The program finds a path from location `1` to location `5` using the graph.
+
+BFS finds a path with the minimum number of roads when all roads are treated equally.
