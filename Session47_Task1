@@ -1,0 +1,32 @@
+Scenario:
+
+A web browser stores recently visited pages. When the user presses the Back button, the most recently visited page should be removed first. Implement this using a Stack.
+
+Program:
+
+import java.util.Stack;
+
+public class BrowserHistory {
+    public static void main(String[] args) {
+        Stack<String> history = new Stack<>();
+
+        history.push("google.com");
+        history.push("youtube.com");
+        history.push("github.com");
+
+        System.out.println("Current History: " + history);
+
+        System.out.println("Back button pressed.");
+        history.pop();
+
+        System.out.println("Current History: " + history);
+        System.out.println("Current Page: " + history.peek());
+    }
+}
+
+Output:
+
+Current History: [google.com, youtube.com, github.com]
+Back button pressed.
+Current History: [google.com, youtube.com]
+Current Page: youtube.com
