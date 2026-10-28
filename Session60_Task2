@@ -1,0 +1,113 @@
+## Week 12 – Question 10: Product Inventory and Low-Stock Analysis
+
+Problem Statement:
+
+Create a Product Inventory Management System using Java collections. Store each product's ID, name, stock quantity, and price. Update the stock after sales, find products whose stock is below a given threshold, and display products sorted by their remaining stock. Use a collection that supports efficient product lookup by ID.
+
+### Java Program
+
+```
+
+import java.util.*;
+
+class Product {
+    int id;
+    String name;
+    int stock;
+    double price;
+
+    Product(int id, String name, int stock, double price) {
+        this.id = id;
+        this.name = name;
+        this.stock = stock;
+        this.price = price;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int n = sc.nextInt();
+        HashMap<Integer, Product> map = new HashMap<>();
+
+        for (int i = 0; i < n; i++) {
+            int id = sc.nextInt();
+            String name = sc.next();
+            int stock = sc.nextInt();
+            double price = sc.nextDouble();
+
+            map.put(id, new Product(id, name, stock, price));
+        }
+
+        int salesId = sc.nextInt();
+        int sold = sc.nextInt();
+
+        if (map.containsKey(salesId)) {
+            Product p = map.get(salesId);
+
+            if (sold <= p.stock) {
+                p.stock -= sold;
+            }
+        }
+
+        int threshold = sc.nextInt();
+
+        System.out.println("Low Stock Products:");
+
+        for (Product p : map.values()) {
+            if (p.stock < threshold) {
+                System.out.println(p.id + " " + p.name + " " + p.stock);
+            }
+        }
+
+        ArrayList<Product> list = new ArrayList<>(map.values());
+
+        list.sort((a, b) -> {
+            if (a.stock != b.stock) {
+                return a.stock - b.stock;
+            }
+            return a.id - b.id;
+        });
+
+        System.out.println("Products Sorted by Stock:");
+
+        for (Product p : list) {
+            System.out.println(p.id + " " + p.name + " " 
+                    + p.stock + " " + p.price);
+        }
+
+        sc.close();
+    }
+}
+
+```
+
+### Input
+
+```
+3
+101 Laptop 10 50000
+102 Mouse 5 500
+103 Keyboard 8 1500
+101 7
+5
+```
+
+### Output
+
+```
+Low Stock Products:
+101 Laptop 3
+Products Sorted by Stock:
+101 Laptop 3 50000.0
+102 Mouse 5 500.0
+103 Keyboard 8 1500.0
+```
+
+### Explanation
+
+1. The program stores product details in a `HashMap` using the product ID as the key.
+2. It sells 7 laptops, reducing their stock from 10 to 3.
+3. It displays products whose stock is below 5.
+4. Finally, it sorts all products by remaining stock in ascending order. If stocks are equal, it sorts by product ID.
