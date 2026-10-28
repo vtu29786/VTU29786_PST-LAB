@@ -1,0 +1,38 @@
+Scenario:
+
+Two students have selected different subjects. Write a Java program using retainAll() to find the subjects common to both students.
+
+Program:
+
+import java.util.HashSet;
+import java.util.Set;
+
+public class CommonSubjects {
+    public static void main(String[] args) {
+        Set<String> student1 = new HashSet<>();
+        Set<String> student2 = new HashSet<>();
+
+        student1.add("Java");
+        student1.add("Python");
+        student1.add("Database");
+        student1.add("C++");
+
+        student2.add("Java");
+        student2.add("Database");
+        student2.add("Networking");
+        student2.add("HTML");
+
+        System.out.println("Student 1 Subjects: " + student1);
+        System.out.println("Student 2 Subjects: " + student2);
+
+        student1.retainAll(student2);
+
+        System.out.println("Common Subjects: " + student1);
+    }
+}
+
+Output:
+
+Student 1 Subjects: [Java, Python, Database, C++]
+Student 2 Subjects: [Java, Database, Networking, HTML]
+Common Subjects: [Java, Database]
