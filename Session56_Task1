@@ -1,0 +1,66 @@
+## Week 12 – Question 1: Hashtag Frequency Counter
+
+### Question
+
+A social media platform receives `N` hashtags. Count the frequency of each hashtag and display the hashtags along with their frequencies.
+
+If multiple hashtags have the same frequency, display them in lexicographical order.
+
+### Program (Java)
+
+```
+
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int n = sc.nextInt();
+        HashMap<String, Integer> map = new HashMap<>();
+
+        for (int i = 0; i < n; i++) {
+            String hashtag = sc.next();
+            map.put(hashtag, map.getOrDefault(hashtag, 0) + 1);
+        }
+
+        ArrayList<String> list = new ArrayList<>(map.keySet());
+        Collections.sort(list);
+
+        for (String hashtag : list) {
+            System.out.println(hashtag + " " + map.get(hashtag));
+        }
+
+        sc.close();
+    }
+}
+
+```
+
+### Input
+
+```
+6
+#java
+#python
+#java
+#coding
+#python
+#java
+```
+
+### Output
+
+```
+#coding 1
+#java 3
+#python 2
+```
+
+### Explanation
+
+- `#java` appears 3 times.
+- `#python` appears 2 times.
+- `#coding` appears 1 time.
+
+The hashtags are displayed in lexicographical (alphabetical) order.
