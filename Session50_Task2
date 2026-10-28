@@ -1,0 +1,48 @@
+Scenario:
+
+A mobile application stores people's names and phone numbers. Write a Java program that can search for a contact and update an existing phone number.
+
+Program:
+
+import java.util.HashMap;
+
+public class ContactDirectory {
+    public static void main(String[] args) {
+        HashMap<String, String> contacts = new HashMap<>();
+
+        contacts.put("Arun", "9876543210");
+        contacts.put("Priya", "9123456780");
+        contacts.put("Kumar", "9988776655");
+
+        String searchName = "Priya";
+
+        System.out.println("Searching Contact: " + searchName);
+
+        if (contacts.containsKey(searchName)) {
+            System.out.println("Phone Number: " + contacts.get(searchName));
+        } else {
+            System.out.println("Contact not found.");
+        }
+
+        String updateName = "Priya";
+        String newNumber = "9000011111";
+
+        if (contacts.containsKey(updateName)) {
+            contacts.put(updateName, newNumber);
+            System.out.println("Contact updated successfully.");
+        } else {
+            System.out.println("Contact not found.");
+        }
+
+        System.out.println("Updated Contact: " + updateName);
+        System.out.println("Phone Number: " + contacts.get(updateName));
+    }
+}
+
+Output:
+
+Searching Contact: Priya
+Phone Number: 9123456780
+Contact updated successfully.
+Updated Contact: Priya
+Phone Number: 9000011111
