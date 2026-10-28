@@ -1,0 +1,71 @@
+## Week 12 – Question 9: Student Marks Indexing System
+
+Problem Statement:
+
+Create a Student Marks Indexing System using a HashMap. Store each student's ID, name, and marks. Allow the user to search for a student using their ID and display the student's details if found.
+
+### Java Program
+
+```
+
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int n = sc.nextInt();
+
+        HashMap<Integer, String> names = new HashMap<>();
+        HashMap<Integer, Integer> marks = new HashMap<>();
+
+        for (int i = 0; i < n; i++) {
+            int id = sc.nextInt();
+            String name = sc.next();
+            int mark = sc.nextInt();
+
+            names.put(id, name);
+            marks.put(id, mark);
+        }
+
+        int searchId = sc.nextInt();
+
+        if (names.containsKey(searchId)) {
+            System.out.println("Student ID: " + searchId);
+            System.out.println("Name: " + names.get(searchId));
+            System.out.println("Marks: " + marks.get(searchId));
+        } else {
+            System.out.println("Student not found");
+        }
+
+        sc.close();
+    }
+}
+
+```
+
+### Input
+
+```
+3
+101 Ravi 85
+102 Priya 92
+103 Arun 78
+102
+```
+
+### Output
+
+```
+Student ID: 102
+Name: Priya
+Marks: 92
+```
+
+### Explanation
+
+- The program stores student IDs, names, and marks using `HashMap`.
+- The user searches for student ID `102`.
+- The program finds Priya's details and displays her marks.
+
+Note: HashMap allows efficient lookup of student details using the student ID.
