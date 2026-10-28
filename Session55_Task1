@@ -1,0 +1,70 @@
+## Week 11 – Question 9: Migratory Birds
+
+### Question
+
+Given an array of bird sightings where each element represents a bird type ID, determine the ID of the most frequently sighted bird type.
+
+If more than one type has the maximum frequency, return the smallest bird type ID.
+
+### Program (Java)
+
+```
+
+import java.util.*;
+
+class Solution {
+    public int migratoryBirds(List<Integer> arr) {
+        Map<Integer, Integer> count = new HashMap<>();
+
+        for (int bird : arr) {
+            count.put(bird, count.getOrDefault(bird, 0) + 1);
+        }
+
+        int maxCount = 0;
+        int result = Integer.MAX_VALUE;
+
+        for (int bird : count.keySet()) {
+            int frequency = count.get(bird);
+
+            if (frequency > maxCount) {
+                maxCount = frequency;
+                result = bird;
+            } else if (frequency == maxCount && bird < result) {
+                result = bird;
+            }
+        }
+
+        return result;
+    }
+
+    public static void main(String[] args) {
+        Solution s = new Solution();
+
+        List<Integer> arr = Arrays.asList(1, 4, 4, 4, 5, 3);
+
+        System.out.println(s.migratoryBirds(arr));
+    }
+}
+
+```
+
+### Input
+
+```
+6
+1 4 4 4 5 3
+```
+
+### Output
+
+```
+4
+```
+
+### Explanation
+
+- Bird type `1` appears once.
+- Bird type `4` appears three times.
+- Bird types `5` and `3` appear once each.
+
+Bird type `4` has the highest frequency, so the answer is `4`.
